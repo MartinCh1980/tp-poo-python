@@ -4,23 +4,14 @@ class Miembro:
 
         nombre = str(nombre).strip()
 
-        if isinstance(dni, str):
-            dni = dni.strip()
-
         if not nombre:
             raise ValueError("El nombre no puede estar vacío.")
 
-        if isinstance(dni, str):
-            if not dni.isdigit():
-                raise ValueError("El DNI debe ser numérico.")
-            dni = int(dni)
-
-        if not isinstance(dni, int):
+        if isinstance(dni, bool) or not isinstance(dni, int):
             raise ValueError("El DNI debe ser un número entero.")
 
         self.__dni = dni
         self.__nombre = nombre
-
         self.__libros_prestados = []
 
     

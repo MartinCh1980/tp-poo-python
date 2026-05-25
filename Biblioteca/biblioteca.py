@@ -13,7 +13,6 @@ class Biblioteca:
                 )
 
         self.__libros.append(libro)
-
         print(f"\n  Libro '{libro.getTitulo()}' agregado correctamente.")
 
     def agregarMiembro(self, miembro):
@@ -25,7 +24,6 @@ class Biblioteca:
                 )
 
         self.__miembros.append(miembro)
-
         print(f"\n  Miembro '{miembro.getNombre()}' agregado correctamente.")
 
     

@@ -8,9 +8,7 @@ class SistemaBiblioteca:
     def __init__(self):
         self.__biblioteca = Biblioteca()
 
-    # =========================
-    # VALIDACIONES AUXILIARES
-    # =========================
+   
 
     def validarISBN13(self, isbn):
 
@@ -50,9 +48,7 @@ class SistemaBiblioteca:
 
         return int(dniTexto)
 
-    # =========================
-    # MENÚ
-    # =========================
+    
 
     def mostrarMenu(self):
 
@@ -68,9 +64,7 @@ class SistemaBiblioteca:
         print("║  6 - Devolver libro                     ║")
         print("╚══════════════════════════════════════════╝")
 
-    # =========================
-    # EJECUCIÓN
-    # =========================
+    
 
     def ejecutar(self):
 
@@ -86,9 +80,7 @@ class SistemaBiblioteca:
                     print("\n  Cerrando sistema...")
                     break
 
-                # =========================
-                # AGREGAR LIBRO
-                # =========================
+                
                 elif opcion == "1":
 
                     titulo = input("  Título: ").strip()
@@ -104,12 +96,10 @@ class SistemaBiblioteca:
                     isbn = self.validarISBN13(isbn)
 
                     libro = Libro(titulo, autor, isbn)
-
                     self.__biblioteca.agregarLibro(libro)
 
-                # =========================
-                # AGREGAR MIEMBRO
-                # =========================
+                
+
                 elif opcion == "2":
 
                     dniTexto = input("  DNI (7 u 8 dígitos): ").strip()
@@ -121,24 +111,17 @@ class SistemaBiblioteca:
                     dni = self.validarDNI(dniTexto)
 
                     miembro = Miembro(dni, nombre)
-
                     self.__biblioteca.agregarMiembro(miembro)
 
-                # =========================
-                # MOSTRAR LIBROS
-                # =========================
+                
                 elif opcion == "3":
                     self.__biblioteca.mostrarLibros()
 
-                # =========================
-                # MOSTRAR MIEMBROS
-                # =========================
+                
                 elif opcion == "4":
                     self.__biblioteca.mostrarMiembros()
 
-                # =========================
-                # PRESTAR LIBRO
-                # =========================
+                
                 elif opcion == "5":
 
                     isbn = input("  ISBN del libro: ").strip()
@@ -149,9 +132,7 @@ class SistemaBiblioteca:
 
                     self.__biblioteca.prestarLibro(isbn, dni)
 
-                # =========================
-                # DEVOLVER LIBRO
-                # =========================
+                
                 elif opcion == "6":
 
                     isbn = input("  ISBN del libro: ").strip()
