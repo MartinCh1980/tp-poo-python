@@ -1,8 +1,5 @@
 class Curso:
-    """
-    Representa un curso de la facultad.
-    """
-
+    
     def __init__(
         self,
         nombre,
@@ -43,8 +40,7 @@ class Curso:
 
         self.__estudiantes_inscriptos = []
 
-    # ─── Getters ─────────────────────────────────────────────
-
+    
     def getNombre(self):
         return self.__nombre
 
@@ -71,8 +67,7 @@ class Curso:
             - len(self.__estudiantes_inscriptos)
         )
 
-    # ─── Inscripciones ───────────────────────────────────────
-
+    
     def inscribirEstudiante(self, estudiante):
 
         if estudiante in self.__estudiantes_inscriptos:
@@ -109,8 +104,7 @@ class Curso:
             estudiante
         )
 
-    # ─── Representación ──────────────────────────────────────
-
+    
     def __str__(self):
 
         return (

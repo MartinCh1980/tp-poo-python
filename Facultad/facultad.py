@@ -1,16 +1,11 @@
 class Facultad:
-    """
-    Administra estudiantes,
-    cursos e inscripciones.
-    """
-
+    
     def __init__(self):
 
         self.__estudiantes = []
         self.__cursos = []
 
-    # ─── Altas ───────────────────────────────────────────────
-
+   
     def agregarEstudiante(self, estudiante):
 
         for estudianteExistente in self.__estudiantes:
@@ -54,8 +49,7 @@ class Facultad:
             f"correctamente."
         )
 
-    # ─── Búsquedas ───────────────────────────────────────────
-
+    
     def buscarEstudiante(self, matricula):
 
         for estudiante in self.__estudiantes:
@@ -83,8 +77,7 @@ class Facultad:
             f"con código '{codigo}'."
         )
 
-    # ─── Inscripciones ───────────────────────────────────────
-
+    
     def inscribirEstudiante(
         self,
         matricula,
@@ -107,8 +100,7 @@ class Facultad:
             f"correctamente."
         )
 
-    # ─── Bajas ───────────────────────────────────────────────
-
+    
     def darDeBajaEstudiante(
         self,
         matricula,
@@ -140,8 +132,7 @@ class Facultad:
             f"correctamente."
         )
 
-    # ─── Mostrar información ─────────────────────────────────
-
+    
     def mostrarCursos(self):
 
         if not self.__cursos:

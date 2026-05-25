@@ -2,10 +2,7 @@ from persona import Persona
 
 
 class Estudiante(Persona):
-    """
-    Representa un estudiante de la facultad.
-    """
-
+    
     _contador_id = 1
 
     def __init__(
@@ -39,8 +36,7 @@ class Estudiante(Persona):
 
         self.__cursos_inscriptos = []
 
-    # ─── Getters ─────────────────────────────────────────────
-
+    
     def getId(self):
         return self.__id
 
@@ -53,8 +49,7 @@ class Estudiante(Persona):
     def getCursosInscriptos(self):
         return self.__cursos_inscriptos.copy()
 
-    # ─── Gestión de cursos ───────────────────────────────────
-
+   
     def agregarCurso(self, curso):
 
         if curso in self.__cursos_inscriptos:
@@ -76,8 +71,7 @@ class Estudiante(Persona):
 
         self.__cursos_inscriptos.remove(curso)
 
-    # ─── Representación ──────────────────────────────────────
-
+    
     def __str__(self):
 
         return (

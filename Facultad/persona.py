@@ -1,8 +1,5 @@
 class Persona:
-    """
-    Representa una persona de la facultad.
-    """
-
+    
     def __init__(self, nombre, apellido):
 
         if not nombre.strip():
@@ -18,16 +15,14 @@ class Persona:
         self._nombre = nombre.strip()
         self._apellido = apellido.strip()
 
-    # ─── Getters ─────────────────────────────────────────────
-
+    
     def getNombre(self):
         return self._nombre
 
     def getApellido(self):
         return self._apellido
 
-    # ─── Representación ──────────────────────────────────────
-
+    
     def __str__(self):
 
         return (
