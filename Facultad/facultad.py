@@ -1,7 +1,6 @@
 class Facultad:
     
     def __init__(self):
-
         self.__estudiantes = []
         self.__cursos = []
 
@@ -9,7 +8,6 @@ class Facultad:
     def agregarEstudiante(self, estudiante):
 
         for estudianteExistente in self.__estudiantes:
-
             if (
                 estudianteExistente.getMatricula()
                 == estudiante.getMatricula()
@@ -21,7 +19,6 @@ class Facultad:
                 )
 
         self.__estudiantes.append(estudiante)
-
         print(
             f"\n  Estudiante agregado "
             f"correctamente."
@@ -31,7 +28,6 @@ class Facultad:
     def agregarCurso(self, curso):
 
         for cursoExistente in self.__cursos:
-
             if (
                 cursoExistente.getCodigo()
                 == curso.getCodigo()
@@ -43,21 +39,13 @@ class Facultad:
                 )
 
         self.__cursos.append(curso)
-
-        print(
-            f"\n  Curso agregado "
-            f"correctamente."
-        )
+        print("\n  Curso agregado correctamente.")
 
     
     def buscarEstudiante(self, matricula):
 
         for estudiante in self.__estudiantes:
-
-            if (
-                estudiante.getMatricula()
-                == matricula
-            ):
+            if estudiante.getMatricula() == matricula:
                 return estudiante
 
         raise LookupError(
@@ -68,7 +56,6 @@ class Facultad:
     def buscarCurso(self, codigo):
 
         for curso in self.__cursos:
-
             if curso.getCodigo() == codigo:
                 return curso
 
@@ -78,128 +65,67 @@ class Facultad:
         )
 
     
-    def inscribirEstudiante(
-        self,
-        matricula,
-        codigo_curso
-    ):
+    def inscribirEstudiante(self, matricula, codigo_curso):
 
-        estudiante = self.buscarEstudiante(
-            matricula
-        )
-
-        curso = self.buscarCurso(
-            codigo_curso
-        )
+        estudiante = self.buscarEstudiante(matricula)
+        curso = self.buscarCurso(codigo_curso)
 
         curso.inscribirEstudiante(estudiante)
         estudiante.agregarCurso(curso)
 
-        print(
-            f"\n  Inscripción realizada "
-            f"correctamente."
-        )
+        print("\n  Inscripción realizada correctamente.")
 
     
-    def darDeBajaEstudiante(
-        self,
-        matricula,
-        codigo_curso
-    ):
+    def darDeBajaEstudiante(self, matricula, codigo_curso):
 
-        estudiante = self.buscarEstudiante(
-            matricula
-        )
+        estudiante = self.buscarEstudiante(matricula)
+        curso = self.buscarCurso(codigo_curso)
 
-        curso = self.buscarCurso(
-            codigo_curso
-        )
-
-        if (
-            curso
-            not in estudiante.getCursosInscriptos()
-        ):
-            raise RuntimeError(
-                f"El estudiante no está "
-                f"inscripto en ese curso."
-            )
-
+        # Curso y Estudiante ya validan internamente
         curso.darDeBajaEstudiante(estudiante)
         estudiante.removerCurso(curso)
 
-        print(
-            f"\n  Baja realizada "
-            f"correctamente."
-        )
+        print("\n  Baja realizada correctamente.")
 
     
     def mostrarCursos(self):
 
         if not self.__cursos:
-
-            print(
-                "\n  No hay cursos registrados."
-            )
-
+            print("\n  No hay cursos registrados.")
             return
 
-        print(
-            "\n╔══════════════ CURSOS ══════════════╗"
-        )
+        print("\n╔══════════════ CURSOS ══════════════╗")
 
         for curso in self.__cursos:
-
             print(curso)
-
             estudiantes = [
-                (
-                    f"{e.getNombre()} "
-                    f"{e.getApellido()}"
-                )
+                f"{e.getNombre()} {e.getApellido()}"
                 for e in curso.getEstudiantesInscriptos()
             ]
-
             estudiantesTexto = (
                 ", ".join(estudiantes)
                 if estudiantes
                 else "Ninguno"
             )
-
-            print(
-                f"  Estudiantes: "
-                f"{estudiantesTexto}"
-            )
+            print(f"  Estudiantes: {estudiantesTexto}")
 
     def mostrarEstudiantes(self):
 
         if not self.__estudiantes:
-
-            print(
-                "\n  No hay estudiantes registrados."
-            )
-
+            print("\n  No hay estudiantes registrados.")
             return
 
-        print(
-            "\n╔═══════════ ESTUDIANTES ═══════════╗"
-        )
+        print("\n╔═══════════ ESTUDIANTES ═══════════╗")
 
         for estudiante in self.__estudiantes:
-
             print(estudiante)
-
             cursos = [
                 curso.getNombre()
-                for curso
-                in estudiante.getCursosInscriptos()
+                for curso in estudiante.getCursosInscriptos()
             ]
-
             cursosTexto = (
                 ", ".join(cursos)
                 if cursos
                 else "Ninguno"
             )
-
-            print(
-                f"  Cursos: {cursosTexto}"
-            )
+            print(f"  Cursos: {cursosTexto}")

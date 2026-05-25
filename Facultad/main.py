@@ -20,12 +20,20 @@ class SistemaFacultad:
         print("║  6 - Dar de baja estudiante de curso        ║")
         print("╚══════════════════════════════════════════════╝")
 
+    def __pedirMatricula(self):
+        """Método auxiliar: pide y valida la matrícula, retorna str."""
+        matriculaTexto = input("  Matrícula: ").strip()
+        if not matriculaTexto.isdigit():
+            raise ValueError("La matrícula debe ser un número entero positivo.")
+        if int(matriculaTexto) <= 0:
+            raise ValueError("La matrícula no puede ser negativa ni cero.")
+        return matriculaTexto  # ← str, compatible con Estudiante.getMatricula()
+
     def ejecutar(self):
 
         while True:
 
             self.mostrarMenu()
-
             opcion = input("\n  Seleccione una opción: ").strip()
 
             try:
@@ -35,49 +43,27 @@ class SistemaFacultad:
                     break
 
                 elif opcion == "1":
+                    nombre    = input("  Nombre: ").strip()
+                    apellido  = input("  Apellido: ").strip()
+                    matricula = self.__pedirMatricula()  # ← str
+                    carrera   = input("  Carrera: ").strip()
 
-                    nombre = input("  Nombre: ").strip()
-                    apellido = input("  Apellido: ").strip()
-
-                    matriculaTexto = input("  Matrícula: ").strip()
-
-                    if not matriculaTexto.isdigit():
-                        raise ValueError("La matrícula debe ser un número entero positivo.")
-
-                    matricula = int(matriculaTexto)
-
-                    if matricula <= 0:
-                        raise ValueError("La matrícula no puede ser negativa ni cero.")
-
-                    carrera = input("  Carrera: ").strip()
-
-                    estudiante = Estudiante(
-                        nombre,
-                        apellido,
-                        matricula,
-                        carrera
-                    )
-
+                    estudiante = Estudiante(nombre, apellido, matricula, carrera)
                     self.__facultad.agregarEstudiante(estudiante)
 
                 elif opcion == "2":
-
-                    nombre = input("  Nombre del curso: ").strip()
-                    codigo = input("  Código del curso: ").strip()
+                    nombre   = input("  Nombre del curso: ").strip()
+                    codigo   = input("  Código del curso: ").strip()
                     profesor = input("  Profesor: ").strip()
 
                     capacidadTexto = input("  Capacidad máxima: ").strip()
-
                     if not capacidadTexto.isdigit():
                         raise ValueError("La capacidad debe ser un número entero.")
-
                     capacidad = int(capacidadTexto)
-
                     if capacidad <= 0:
                         raise ValueError("La capacidad debe ser mayor a cero.")
 
                     curso = Curso(nombre, codigo, profesor, capacidad)
-
                     self.__facultad.agregarCurso(curso)
 
                 elif opcion == "3":
@@ -87,17 +73,13 @@ class SistemaFacultad:
                     self.__facultad.mostrarCursos()
 
                 elif opcion == "5":
-
-                    matricula = input("  Matrícula del estudiante: ").strip()
-                    codigo = input("  Código del curso: ").strip()
-
+                    matricula = self.__pedirMatricula()  # ← str, mismo tipo que en Estudiante
+                    codigo    = input("  Código del curso: ").strip()
                     self.__facultad.inscribirEstudiante(matricula, codigo)
 
                 elif opcion == "6":
-
-                    matricula = input("  Matrícula del estudiante: ").strip()
-                    codigo = input("  Código del curso: ").strip()
-
+                    matricula = self.__pedirMatricula()  # ← str, mismo tipo que en Estudiante
+                    codigo    = input("  Código del curso: ").strip()
                     self.__facultad.darDeBajaEstudiante(matricula, codigo)
 
                 else:

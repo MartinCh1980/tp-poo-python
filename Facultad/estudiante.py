@@ -13,12 +13,10 @@ class Estudiante(Persona):
         carrera
     ):
 
-        super().__init__(
-            nombre,
-            apellido
-        )
+        super().__init__(nombre, apellido)
 
-        if not matricula.strip():
+        # matricula llega como str desde el menú
+        if not str(matricula).strip():
             raise ValueError(
                 "La matrícula no puede estar vacía."
             )
@@ -31,7 +29,7 @@ class Estudiante(Persona):
         self.__id = Estudiante._contador_id
         Estudiante._contador_id += 1
 
-        self.__matricula = matricula.strip()
+        self.__matricula = str(matricula).strip()
         self.__carrera = carrera.strip()
 
         self.__cursos_inscriptos = []

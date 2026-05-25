@@ -24,7 +24,8 @@ class Curso:
             )
 
         if (
-            not isinstance(capacidad_max, int)
+            isinstance(capacidad_max, bool)
+            or not isinstance(capacidad_max, int)
             or capacidad_max <= 0
         ):
             raise ValueError(
@@ -35,9 +36,7 @@ class Curso:
         self.__nombre = nombre.strip()
         self.__codigo = codigo.strip()
         self.__profesor = profesor.strip()
-
         self.__capacidad_max = capacidad_max
-
         self.__estudiantes_inscriptos = []
 
     
@@ -57,9 +56,7 @@ class Curso:
         return self.__estudiantes_inscriptos.copy()
 
     def getCantidadInscriptos(self):
-        return len(
-            self.__estudiantes_inscriptos
-        )
+        return len(self.__estudiantes_inscriptos)
 
     def getCuposDisponibles(self):
         return (
@@ -85,9 +82,7 @@ class Curso:
                 f"no tiene cupos disponibles."
             )
 
-        self.__estudiantes_inscriptos.append(
-            estudiante
-        )
+        self.__estudiantes_inscriptos.append(estudiante)
 
     def darDeBajaEstudiante(self, estudiante):
 
@@ -100,9 +95,7 @@ class Curso:
                 f"en '{self.__nombre}'."
             )
 
-        self.__estudiantes_inscriptos.remove(
-            estudiante
-        )
+        self.__estudiantes_inscriptos.remove(estudiante)
 
     
     def __str__(self):
