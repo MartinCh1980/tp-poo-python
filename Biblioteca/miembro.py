@@ -1,19 +1,25 @@
 class Miembro:
-    
+
     def __init__(self, dni, nombre):
 
-        if not dni.strip():
-            raise ValueError(
-                "El DNI no puede estar vacío."
-            )
+        nombre = str(nombre).strip()
 
-        if not nombre.strip():
-            raise ValueError(
-                "El nombre no puede estar vacío."
-            )
+        if isinstance(dni, str):
+            dni = dni.strip()
 
-        self.__dni = dni.strip()
-        self.__nombre = nombre.strip()
+        if not nombre:
+            raise ValueError("El nombre no puede estar vacío.")
+
+        if isinstance(dni, str):
+            if not dni.isdigit():
+                raise ValueError("El DNI debe ser numérico.")
+            dni = int(dni)
+
+        if not isinstance(dni, int):
+            raise ValueError("El DNI debe ser un número entero.")
+
+        self.__dni = dni
+        self.__nombre = nombre
 
         self.__libros_prestados = []
 
@@ -26,14 +32,13 @@ class Miembro:
 
     def getLibrosPrestados(self):
         return self.__libros_prestados.copy()
-    
 
+   
     def agregarLibro(self, libro):
 
         if libro in self.__libros_prestados:
             raise RuntimeError(
-                f"El libro '{libro.getTitulo()}' "
-                f"ya fue agregado al miembro."
+                f"El libro '{libro.getTitulo()}' ya está asignado al miembro."
             )
 
         self.__libros_prestados.append(libro)
@@ -42,9 +47,7 @@ class Miembro:
 
         if libro not in self.__libros_prestados:
             raise LookupError(
-                f"El libro '{libro.getTitulo()}' "
-                f"no figura entre los préstamos "
-                f"de {self.__nombre}."
+                f"El libro '{libro.getTitulo()}' no pertenece a {self.__nombre}."
             )
 
         self.__libros_prestados.remove(libro)

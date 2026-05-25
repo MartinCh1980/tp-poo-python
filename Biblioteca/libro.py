@@ -1,19 +1,23 @@
 class Libro:
-    
+
     def __init__(self, titulo, autor, isbn):
 
-        if not titulo.strip():
+        titulo = str(titulo).strip()
+        autor = str(autor).strip()
+        isbn = str(isbn).strip()
+
+        if not titulo:
             raise ValueError("El título no puede estar vacío.")
 
-        if not autor.strip():
+        if not autor:
             raise ValueError("El autor no puede estar vacío.")
 
-        if not isbn.strip():
+        if not isbn:
             raise ValueError("El ISBN no puede estar vacío.")
 
-        self.__titulo = titulo.strip()
-        self.__autor = autor.strip()
-        self.__isbn = isbn.strip()
+        self.__titulo = titulo
+        self.__autor = autor
+        self.__isbn = isbn
 
         self.__disponible = True
         self.__miembro_prestamo = None
@@ -34,18 +38,19 @@ class Libro:
     def getMiembroPrestamo(self):
         return self.__miembro_prestamo
 
-   
+    
     def prestar(self, miembro):
 
         if not self.__disponible:
             raise RuntimeError(
-                f"El libro '{self.__titulo}' no está disponible. "
-                f"Actualmente lo tiene: {self.__miembro_prestamo.getNombre()}."
+                f"El libro '{self.__titulo}' ya está prestado a "
+                f"{self.__miembro_prestamo.getNombre()}."
             )
 
         self.__disponible = False
         self.__miembro_prestamo = miembro
 
+    
     def devolver(self):
 
         if self.__disponible:
@@ -59,13 +64,11 @@ class Libro:
     
     def __str__(self):
 
-        if self.__disponible:
-            estado = "Disponible"
-        else:
-            estado = (
-                f"Prestado a: "
-                f"{self.__miembro_prestamo.getNombre()}"
-            )
+        estado = (
+            "Disponible"
+            if self.__disponible
+            else f"Prestado a: {self.__miembro_prestamo.getNombre()}"
+        )
 
         return (
             f"Título: {self.__titulo} | "
